@@ -1,0 +1,23 @@
+services:
+  postgres-db:
+    image: postgres:15-alpine # Versão estável e leve (alpine) do Postgres
+    container_name: mps-postgres-container
+    environment:
+      POSTGRES_USER: admin          # Nome do usuário do banco
+      POSTGRES_PASSWORD: admin  # Senha do banco
+      POSTGRES_DB: mps_user_db         # Nome do banco de dados que será criado automaticamente
+    ports:
+      - "5432:5432" # Expõe a porta padrão do Postgres para a sua máquina física
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Garante que os dados não sumam quando o container parar
+    networks:
+      - mps-network
+
+volumes:
+  postgres_data: # Define o volume persistente
+
+networks:
+  mps-network: # Rede interna caso você queira conectar outros microserviços no futuro
+    driver: bridge
+
+# docker exec -it mps-postgres-container psql -U admin -d mps_user_db

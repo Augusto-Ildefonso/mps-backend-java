@@ -1,0 +1,14 @@
+package com.mps.auth_microservice.DTOs;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class UserCredentialsDTO {
+    private String id;
+    private String password;
+    private String name;
+    private String email;
+    private String cpf;
+}
